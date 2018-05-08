@@ -166,7 +166,7 @@ function scene:show( event )
         Runtime:addEventListener("enterFrame", moveHyphen)
 
         -- Go to the main menu screen after the given time.
-        timer.performWithDelay ( 4000, gotoMainMenu)            
+        timer.performWithDelay ( 2000, gotoMainMenu)            
     end
 
 end --function scene:show( event )
