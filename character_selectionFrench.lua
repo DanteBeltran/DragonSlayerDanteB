@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- instructions_screen.lua
+-- character_selectionFrench.lua
 -- Created by: Dante B
 -- Special thanks to Wal Wal for helping in the design of this framework.
 -- Date: 2018-04-10
@@ -78,10 +78,10 @@ function scene:create( event )
     -- BUTTON WIDGETS
     -----------------------------------------------------------------------------------------
 
-    -- Creating Back Button
+    -- Creating Retourner Button
     retournerButton = widget.newButton( 
     {
-        -- Setting Position
+        -- Setting Position and size
         x = display.contentWidth*1/8,
         y = display.contentHeight*15/16,
         width = 200,
@@ -101,7 +101,7 @@ function scene:create( event )
     -- Creating Dante Button
     danteButton = widget.newButton( 
     {
-        -- Setting Position
+        -- Setting Position and size
         x = display.contentWidth*1.2/8,
         y = display.contentHeight*11.4/16,
         width = 200,
@@ -122,7 +122,7 @@ function scene:create( event )
     -- Creating Huda Button
     hudaButton = widget.newButton( 
     {
-        -- Setting Position
+        -- Setting Position and size
         x = display.contentWidth*3/8,
         y = display.contentHeight*11.4/16,
         width = 200,
@@ -142,7 +142,7 @@ function scene:create( event )
     -- Creating Lorenzo Button
     lorenzoButton = widget.newButton( 
     {
-        -- Setting Position
+        -- Setting Position and size
         x = display.contentWidth*5/8,
         y = display.contentHeight*11.4/16,
         width = 200,
@@ -162,7 +162,7 @@ function scene:create( event )
     -- Creating Ethan Button
     ethanButton = widget.newButton( 
     {
-        -- Setting Position
+        -- Setting Position and size
         x = display.contentWidth*7/8,
         y = display.contentHeight*11.4/16,
         width = 200,

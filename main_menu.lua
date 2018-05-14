@@ -32,6 +32,7 @@ local scene = composer.newScene( sceneName )
 -- LOCAL VARIABLES
 -----------------------------------------------------------------------------------------
 
+-- declare local variables
 local bkg_image
 local playButton
 local jouerButton
@@ -63,38 +64,41 @@ end
 
 -----------------------------------------------------------------------------------------
 
--- Creating Transition to Level1 Screen
+-- Creating Transition to character selection screen
 local function CharacterSelectionScreenTransition( )
     composer.gotoScene( "character_selection", {effect = "flip", time = 1000})
 end    
 
 -----------------------------------------------------------------------------------------
 
--- Creating Transition to Level1 Screen
+-- Creating Transition to character selection screen
 local function CharacterSelectionScreenFrenchTransition( )
     composer.gotoScene( "character_selectionFrench", {effect = "flip", time = 1000})
 end    
 
 -----------------------------------------------------------------------------------------
 
+-- Creating transition to instructions screen
 local function InstructionsTransition( )
     composer.gotoScene( "instructions_screen", {effect = "fromRight", time = 1000})
 end
 
 -----------------------------------------------------------------------------------------
 
--- Creating Transition Function to Credits Page
+-- Creating Transition Function to  FrenchCredits Page
 local function CreditsFrenchTransition( )       
     composer.gotoScene( "creditsFrench_screen", {effect = "crossFade", time = 500})
 end 
 
 -----------------------------------------------------------------------------------------
 
+---- Creating transition to french instructions screen
 local function InstructionsFrenchTransition( )
     composer.gotoScene( "instructionsFrench_screen", {effect = "fromRight", time = 1000})
 end
 
-local function FrenchTransition( )
+-- changes all the buttons to english
+local function EnglishTransition( )
     frenchButton.isVisible = true
     englishButton.isVisible = false
     playButton.isVisible = true
@@ -106,7 +110,8 @@ local function FrenchTransition( )
 
 end
 
-local function EnglishTransition( )
+--changes all the buttons to french
+local function FrenchTransition( )
     englishButton.isVisible = true
     frenchButton.isVisible = false
     playButton.isVisible = false
@@ -118,13 +123,14 @@ local function EnglishTransition( )
 end
 
 
-
+-- pauses the sound
 local function SoundPause( )
     audio.pause(bkgMusic)
     muteButton.isVisible = false
     unmuteButton.isVisible = true
 end
 
+-- unpauses the sound
 local function SoundUnpause()
     audio.play(bkgMusic)
     muteButton.isVisible = true
@@ -177,7 +183,7 @@ function scene:create( event )
             defaultFile = "Images/Mute Button Unpressed.png",
             overFile = "Images/Mute Button Pressed.png",
 
-            -- When the button is released, call the Level1 screen transition function
+            -- When the button is released, call the Sound Pause function
             onRelease = SoundPause
         } )
     
@@ -196,7 +202,7 @@ function scene:create( event )
             defaultFile = "Images/Unmute Button Unpressed.png",
             overFile = "Images/Unmute Button Pressed.png",
 
-            -- When the button is released, call the Level1 screen transition function
+            -- When the button is released, call the Sound Unpause function function
             onRelease = SoundUnpause
         } )
 
@@ -215,8 +221,8 @@ function scene:create( event )
             defaultFile = "Images/English Button Unpressed.png",
             overFile = "Images/English Button Pressed.png",
 
-            -- When the button is released, call the Level1 screen transition function
-            onRelease = FrenchTransition
+            -- When the button is released, call the English transition function
+            onRelease = EnglishTransition
         } )
 
 ---------------------------------------------------------------------------------------------
@@ -233,8 +239,8 @@ function scene:create( event )
             defaultFile = "Images/French Button Unpressed.png",
             overFile = "Images/French Button Pressed.png",
 
-            -- When the button is released, call the Level1 screen transition function
-            onRelease = EnglishTransition
+            -- When the button is released, call the French transition function
+            onRelease = FrenchTransition
         } )
 
 ---------------------------------------------------------------------------------------------   
@@ -252,7 +258,7 @@ function scene:create( event )
             defaultFile = "Images/Jouer Button Unpressed.png",
             overFile = "Images/Jouer Button Pressed.png",
 
-            -- When the button is released, call the Level1 screen transition function
+            -- When the button is released, call the Character Selection Screen French transition function
             onRelease = CharacterSelectionScreenFrenchTransition          
         } )
 
@@ -270,7 +276,7 @@ function scene:create( event )
             defaultFile = "Images/Play Button Unpressed.png",
             overFile = "Images/Play Button Pressed.png",
 
-            -- When the button is released, call the Level1 screen transition function
+            -- When the button is released, call the character selection screen transition function
             onRelease = CharacterSelectionScreenTransition          
         } )
     -----------------------------------------------------------------------------------------
@@ -307,7 +313,7 @@ function scene:create( event )
             defaultFile = "Images/Credits Button French Unpressed.png",
             overFile = "Images/Credits Button French Pressed.png",
 
-            -- When the button is released, call the Credits transition function
+            -- When the button is released, call the Credits French transition function
             onRelease = CreditsFrenchTransition
         } ) 
 
@@ -325,7 +331,7 @@ function scene:create( event )
             defaultFile = "Images/Instructions Button Unpressed.png",
             overFile = "Images/Instructions Button Pressed.png",
 
-            -- When the button is released, call the Credits transition function
+            -- When the button is released, call the Instructions transition function
             onRelease = InstructionsTransition
         } ) 
 
@@ -344,7 +350,7 @@ function scene:create( event )
             defaultFile = "Images/Instructions Button French Unpressed.png",
             overFile = "Images/Instructions Button French Pressed.png",
 
-            -- When the button is released, call the instuctions transition function
+            -- When the button is released, call the instuctions French transition function
             onRelease = InstructionsFrenchTransition
         } ) 
 

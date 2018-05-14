@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- credits_screen.lua
+-- creditsFrench_screen.lua
 -- Created by: Dante B
 -- Special thanks to Wal Wal for helping in the design of this framework.
 -- Date: 2018-04-10
@@ -70,7 +70,7 @@ function scene:create( event )
     -- BUTTON WIDGETS
     -----------------------------------------------------------------------------------------
 
-    -- Creating Back Button
+    -- Creating Retourner Button
     retournerButton = widget.newButton( 
     {
         -- Setting Position
