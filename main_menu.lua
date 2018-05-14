@@ -34,12 +34,22 @@ local scene = composer.newScene( sceneName )
 
 local bkg_image
 local playButton
+local jouerButton
 local creditsButton
+local creditsFrenchButton
 local instructionsButton
+local instructionsFrenchButton
 local muteButton
+local unmuteButton
 local englishButton
 local frenchButton
 local bkgMusic = audio.loadSound("Sounds/BKG Music.mp3")
+
+--play audio
+audio.play(bkgMusic)
+
+
+
 
 
 -----------------------------------------------------------------------------------------
@@ -54,8 +64,15 @@ end
 -----------------------------------------------------------------------------------------
 
 -- Creating Transition to Level1 Screen
-local function Level1ScreenTransition( )
-    composer.gotoScene( "level1_screen", {effect = "flip", time = 1000})
+local function CharacterSelectionScreenTransition( )
+    composer.gotoScene( "character_selection", {effect = "flip", time = 1000})
+end    
+
+-----------------------------------------------------------------------------------------
+
+-- Creating Transition to Level1 Screen
+local function CharacterSelectionScreenFrenchTransition( )
+    composer.gotoScene( "character_selectionFrench", {effect = "flip", time = 1000})
 end    
 
 -----------------------------------------------------------------------------------------
@@ -64,22 +81,54 @@ local function InstructionsTransition( )
     composer.gotoScene( "instructions_screen", {effect = "fromRight", time = 1000})
 end
 
+-----------------------------------------------------------------------------------------
+
+-- Creating Transition Function to Credits Page
+local function CreditsFrenchTransition( )       
+    composer.gotoScene( "creditsFrench_screen", {effect = "crossFade", time = 500})
+end 
+
+-----------------------------------------------------------------------------------------
+
+local function InstructionsFrenchTransition( )
+    composer.gotoScene( "instructionsFrench_screen", {effect = "fromRight", time = 1000})
+end
+
 local function FrenchTransition( )
     frenchButton.isVisible = true
     englishButton.isVisible = false
+    playButton.isVisible = true
+    creditsButton.isVisible = true
+    instructionsButton.isVisible = true
+    jouerButton.isVisible = false
+    creditsFrenchButton.isVisible = false
+    instructionsFrenchButton.isVisible = false
+
 end
 
 local function EnglishTransition( )
     englishButton.isVisible = true
     frenchButton.isVisible = false
+    playButton.isVisible = false
+    creditsButton.isVisible = false
+    instructionsButton.isVisible = false
+    jouerButton.isVisible = true
+    creditsFrenchButton.isVisible = true
+    instructionsFrenchButton.isVisible = true
 end
+
+
 
 local function SoundPause( )
     audio.pause(bkgMusic)
+    muteButton.isVisible = false
+    unmuteButton.isVisible = true
 end
 
 local function SoundUnpause()
     audio.play(bkgMusic)
+    muteButton.isVisible = true
+    unmuteButton.isVisible = false
 end
 -----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
@@ -109,6 +158,8 @@ function scene:create( event )
     -- Send the background image to the back layer so all other objects can be on top
     bkg_image:toBack()
 
+
+
     -----------------------------------------------------------------------------------------
     -- BUTTON WIDGETS
     -----------------------------------------------------------------------------------------   
@@ -130,6 +181,25 @@ function scene:create( event )
             onRelease = SoundPause
         } )
     
+        -----------------------------------------------------------------------------------------   
+
+-- Creating Mute Button
+    unmuteButton = widget.newButton( 
+        {   
+            -- Set its position on the screen relative to the screen size
+            x = display.contentWidth*7/8,
+            y = display.contentHeight*1/5,
+            width = 200,
+            height = 100,
+
+            -- Insert the images here
+            defaultFile = "Images/Unmute Button Unpressed.png",
+            overFile = "Images/Unmute Button Pressed.png",
+
+            -- When the button is released, call the Level1 screen transition function
+            onRelease = SoundUnpause
+        } )
+
 ---------------------------------------------------------------------------------------------
 
 -- Creating English Button
@@ -168,6 +238,25 @@ function scene:create( event )
         } )
 
 ---------------------------------------------------------------------------------------------   
+-- Creating Jouer Button
+    jouerButton = widget.newButton( 
+        {   
+            -- Set its position on the screen relative to the screen size
+            x = display.contentWidth*4/8,
+            y = display.contentHeight*4/5,
+            width = 200,
+            height = 100,
+
+
+            -- Insert the images here
+            defaultFile = "Images/Jouer Button Unpressed.png",
+            overFile = "Images/Jouer Button Pressed.png",
+
+            -- When the button is released, call the Level1 screen transition function
+            onRelease = CharacterSelectionScreenFrenchTransition          
+        } )
+
+---------------------------------------------------------------------------------------------   
 -- Creating Play Button
     playButton = widget.newButton( 
         {   
@@ -182,9 +271,8 @@ function scene:create( event )
             overFile = "Images/Play Button Pressed.png",
 
             -- When the button is released, call the Level1 screen transition function
-            onRelease = Level1ScreenTransition          
+            onRelease = CharacterSelectionScreenTransition          
         } )
-
     -----------------------------------------------------------------------------------------
 
     -- Creating Credits Button
@@ -203,7 +291,27 @@ function scene:create( event )
             -- When the button is released, call the Credits transition function
             onRelease = CreditsTransition
         } ) 
-    
+
+    -----------------------------------------------------------------------------------------
+
+    -- Creating Credits French Button
+    creditsFrenchButton = widget.newButton( 
+        {
+            -- Set its position on the screen relative to the screen size
+            x = display.contentWidth*7/8,
+            y = display.contentHeight*4/5,
+            width = 200,
+            height = 100,
+
+            -- Insert the images here
+            defaultFile = "Images/Credits Button French Unpressed.png",
+            overFile = "Images/Credits Button French Pressed.png",
+
+            -- When the button is released, call the Credits transition function
+            onRelease = CreditsFrenchTransition
+        } ) 
+
+    ----------------------------------------------------------------------------------------- 
     -- Creating Instructions Button
     instructionsButton = widget.newButton( 
         {
@@ -223,15 +331,38 @@ function scene:create( event )
 
     -----------------------------------------------------------------------------------------
 
+    -- Creating Instructions French Button
+    instructionsFrenchButton = widget.newButton( 
+        {
+            -- Set its position on the screen relative to the screen size
+            x = display.contentWidth*1/8,
+            y = display.contentHeight*4/5,
+            width = 200,
+            height = 100,
+
+            -- Insert the images here
+            defaultFile = "Images/Instructions Button French Unpressed.png",
+            overFile = "Images/Instructions Button French Pressed.png",
+
+            -- When the button is released, call the instuctions transition function
+            onRelease = InstructionsFrenchTransition
+        } ) 
+
+    -----------------------------------------------------------------------------------------
+
+
+
     -- Associating button widgets with this scene
+    sceneGroup:insert( jouerButton)
     sceneGroup:insert( playButton )
+    sceneGroup:insert( creditsFrenchButton )
     sceneGroup:insert( creditsButton )
+    sceneGroup:insert( instructionsFrenchButton )
     sceneGroup:insert( instructionsButton )
+    sceneGroup:insert( unmuteButton) 
     sceneGroup:insert( muteButton)
     sceneGroup:insert( englishButton)
     sceneGroup:insert( frenchButton)
-
-
     
 
 end -- function scene:create( event )   
@@ -317,7 +448,8 @@ scene:addEventListener( "create", scene )
 scene:addEventListener( "show", scene )
 scene:addEventListener( "hide", scene )
 scene:addEventListener( "destroy", scene )
-audio.play(bkgMusic) 
+
+
 
 
 -----------------------------------------------------------------------------------------
